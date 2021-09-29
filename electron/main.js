@@ -1,4 +1,4 @@
-const {app, BrowserWindow, Menu, electron, ipcMain, globalShortcut, desktopCapturer} = require('electron')
+const {app, BrowserWindow, clipboard, Menu, electron, ipcMain, globalShortcut, desktopCapturer} = require('electron')
 const path = require("path");
 
 var win;
@@ -16,7 +16,9 @@ function createWindow() {
         // alwaysOnTop: true,
         // skipTaskbar: true
     })
-    win.loadFile('index.html')
+    win.loadFile('index.html').then(r => function () {
+        console.log("start...")
+    })
 }
 
 app.whenReady().then(() => {
@@ -37,3 +39,19 @@ app.on('activate', () => {
 
 app.on('ready', () => {
 })
+
+
+function getCaptureImg() {
+    let pngs = clipboard.readImage().toPNG()
+    let imgData = new Buffer(pngs, 'base64')
+    let imgs = 'data:image/png;base64'
+}
+
+// 接收渲染进程的异步信息
+ipcMain.on('asynchronous-message', function (event, arg) {
+    console.log(arg); // 打印的结果为刚才我们定义的名为 'winSize' 的字段
+    if (arg === 'winSize') {
+        win.setSize(800, 500); // 改变窗口大小
+        win.center(); // 使窗口居中
+    }
+});

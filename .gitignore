@@ -1,2 +1,5 @@
 node_modules/
 .idea/
+cap.png
+result.jpg
+flask/__pycache__/

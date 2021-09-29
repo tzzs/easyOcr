@@ -53,5 +53,7 @@ ipcMain.on('asynchronous-message', function (event, arg) {
     if (arg === 'winSize') {
         win.setSize(800, 500); // 改变窗口大小
         win.center(); // 使窗口居中
+    } else if (arg === 'ocr') {
+
     }
 });

@@ -1,7 +1,6 @@
 const {app, BrowserWindow, Menu, electron, ipcMain, globalShortcut, desktopCapturer} = require('electron')
 const path = require("path");
 
-
 var win;
 
 function createWindow() {

@@ -67,11 +67,19 @@ ipcMain.on('asynchronous-message', function (event, arg) {
     } else if (arg === 'capture') {
         // get capture image
         let png = clipboard.readImage().toPNG();
-        console.log(png)
-        fs.writeFile(path.resolve(__dirname + '/cap.png'), png, function (err) {
-            if (err) {
-                console.log(err)
-            }
-        })
+        console.log(png.toString())
+        if (png.toString() === '<Buffer >') {
+            // Screenshots not acquired
+
+            // TODO return failed message
+        } else {
+            fs.writeFile(path.resolve(__dirname + '/cap.png'), png, function (err) {
+                if (err) {
+                    console.log(err)
+                }
+            })
+
+            // TODO call the back-end interface to get the recognition content
+        }
     }
 });

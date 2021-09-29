@@ -8,11 +8,12 @@ os.environ['KMP_DUPLICATE_LIB_OK'] = "True"
 table_engine = PPStructure(show_log=True, use_gpu=False)
 
 save_folder = './output/table'
-img_path = './imgs/00006737.jpg'
+img_path = '../electron/cap.png'
 img = cv2.imread(img_path)
 result = table_engine(img)
 save_structure_res(result, save_folder, os.path.basename(img_path).split('.')[0])
 print('*' * 20)
+print(result)
 for line in result:
     line.pop('img')
     print(line)
@@ -23,9 +24,11 @@ result_dict = result[0]
 for key, value in dict(result_dict).items():
     print(key, value)
 
+print('')
 for i in result_dict['res']:
     print(i)
 
+print('*' * 15 + 'print text')
 text = result_dict['res'][1]
 for t in text:
     print(t[0])

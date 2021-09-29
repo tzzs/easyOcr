@@ -3,5 +3,5 @@ const {ipcRenderer} = require('electron');
 
 document.getElementById('capture').onclick = () => {
     // 向主进程发送一个名为 winSize 消息
-    ipcRenderer.send('asynchronous-message', 'winSize');
+    ipcRenderer.send('asynchronous-message', 'capture');
 };

@@ -1,5 +1,16 @@
-const {app, BrowserWindow, clipboard, Menu, electron, ipcMain, globalShortcut, desktopCapturer} = require('electron')
+const {
+    app,
+    BrowserWindow,
+    clipboard,
+    nativeImage,
+    Menu,
+    electron,
+    ipcMain,
+    globalShortcut,
+    desktopCapturer
+} = require('electron')
 const path = require("path");
+const fs = require("fs");
 
 var win;
 
@@ -53,7 +64,14 @@ ipcMain.on('asynchronous-message', function (event, arg) {
     if (arg === 'winSize') {
         win.setSize(800, 500); // 改变窗口大小
         win.center(); // 使窗口居中
-    } else if (arg === 'ocr') {
-
+    } else if (arg === 'capture') {
+        // get capture image
+        let png = clipboard.readImage().toPNG();
+        console.log(png)
+        fs.writeFile(path.resolve(__dirname + '/cap.png'), png, function (err) {
+            if (err) {
+                console.log(err)
+            }
+        })
     }
 });

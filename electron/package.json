@@ -2,14 +2,15 @@
   "name": "easyocr",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "main.js",
   "scripts": {
     "start": "electron .",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "install": "set ELECTRON_MIRROR=http://npm.taobao.org/mirrors/electron/&& node ./node_modules/electron/install.js"
   },
   "author": "tzz",
   "license": "ISC",
   "devDependencies": {
-    "electron": "^14.0.1"
+    "electron": "^14.0.0"
   }
 }

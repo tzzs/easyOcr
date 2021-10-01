@@ -2,4 +2,5 @@ node_modules/
 .idea/
 cap.png
 result.jpg
-flask/__pycache__/
+.vscode/
+__pycache__/

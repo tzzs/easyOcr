@@ -49,14 +49,12 @@ app.on('activate', () => {
 })
 
 app.on('ready', () => {
+    startServer()
 })
 
-
-function getCaptureImg() {
-    let pngs = clipboard.readImage().toPNG()
-    let imgData = new Buffer(pngs, 'base64')
-    let imgs = 'data:image/png;base64'
-}
+app.on('will-quit', () => {
+    stopServer()
+})
 
 // 接收渲染进程的异步信息
 ipcMain.on('asynchronous-message', function (event, arg) {
@@ -67,12 +65,14 @@ ipcMain.on('asynchronous-message', function (event, arg) {
     } else if (arg === 'capture') {
         // get capture image
         let png = clipboard.readImage().toPNG();
-        console.log(png.toString())
-        if (png.toString() === '<Buffer >') {
+        console.log("********************")
+        if (png.toString().trim().length === 0) {
             // Screenshots not acquired
+            console.log("Screentshots not acquired")
 
             // TODO return failed message
         } else {
+            console.log("get the capture image")
             fs.writeFile(path.resolve(__dirname + '/cap.png'), png, function (err) {
                 if (err) {
                     console.log(err)
@@ -83,3 +83,24 @@ ipcMain.on('asynchronous-message', function (event, arg) {
         }
     }
 });
+
+let pyProc = null
+
+// start zerorpc server to process OCR
+const startServer = () => {
+    let port = "4242"
+    let script = path.join("../server", "zerorpc.py")
+
+    pyProc = require('child_process').spawn('python', [script, port])
+    if (pyProc != null) {
+        console.log("child process start successfully")
+    }
+}
+
+// stop the zerorpc when app was closed
+const stopServer = () => {
+    pyProc.kill()
+    pyProc = null
+}
+
+

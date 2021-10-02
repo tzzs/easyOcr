@@ -89,11 +89,14 @@ let pyProc = null
 // start zerorpc server to process OCR
 const startServer = () => {
     let port = "4242"
-    let script = path.join("../server", "zerorpc.py")
+    let script = path.join("../server", "app.py")
 
-    pyProc = require('child_process').spawn('python', [script, port])
+    let cmd = "python " + script
+    pyProc = require('child_process').spawn("python -V")
     if (pyProc != null) {
         console.log("child process start successfully")
+    } else {
+        console.log("child process start failed")
     }
 }
 

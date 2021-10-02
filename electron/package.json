@@ -4,7 +4,7 @@
   "description": "",
   "main": "main.js",
   "scripts": {
-    "start": "electron .",
+    "start": "electron . -enable-webgl",
     "test": "echo \"Error: no test specified\" && exit 1",
     "install": "set ELECTRON_MIRROR=http://npm.taobao.org/mirrors/electron/&& node ./node_modules/electron/install.js"
   },
@@ -12,5 +12,9 @@
   "license": "ISC",
   "devDependencies": {
     "electron": "^14.0.0"
+  },
+  "dependencies": {
+    "axios": "^0.22.0",
+    "zeromq": "^5.2.8"
   }
 }

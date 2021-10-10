@@ -97,6 +97,8 @@ const startServer = () => {
         pythonPath: 'D:/ProgramData/Miniconda3/envs/python3/python.exe',
         scriptPath: '../server',
     }
+
+    // automatically find an unused port
     pyProc = PythonShell.run('app.py', options, function (err, results) {
         console.log(err)
         if (err) throw err;

@@ -5,27 +5,26 @@
     <meta charset="UTF-8">
     <!-- https://developer.mozilla.org/en-US/docs/Web/HTTP/CSP -->
     <meta http-equiv="Content-Security-Policy" content="default-src 'self' localhost; script-src 'self'; connect-src *">
-    <link href="./index.css" rel="stylesheet" type="text/css" />
+    <link href="./index.css" rel="stylesheet" type="text/css"/>
     <title>Hello World!</title>
 </head>
 
 <body>
-    <h1>Hello World!</h1>
-    We are using Node.js <span id="node-version"></span>,
-    Chromium <span id="chrome-version"></span>,
-    and Electron <span id="electron-version"></span>.
-    <br>
-    <span id="render-path"></span>
+<h1>Hello World!</h1>
+We are using Node.js <span id="node-version"></span>,
+Chromium <span id="chrome-version"></span>,
+and Electron <span id="electron-version"></span>.
+<br>
+<span id="render-path"></span>
 
-    <ul class="items">
-        <li id="capture">截图</li>
-        <li id="close">关闭</li>
-    </ul>
+<ul class="items">
+    <li id="capture">截图识别</li>
+</ul>
 
-    <textarea id="result"></textarea>
+<textarea id="result" rows="5" cols="60" readonly></textarea>
 
-    <script src="index.js" type="text/javascript"></script>
-    <script src="render.js" type="text/javascript"></script>
+<script src="index.js" type="text/javascript"></script>
+<script src="render.js" type="text/javascript"></script>
 </body>
 
 </html>

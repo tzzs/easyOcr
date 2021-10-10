@@ -2,10 +2,12 @@ const {
     app,
     BrowserWindow,
     clipboard,
-    ipcMain } = require('electron')
+    ipcMain, ipcRenderer
+} = require('electron')
 const path = require("path");
 const fs = require("fs");
-const { PythonShell } = require('python-shell')
+const {PythonShell} = require('python-shell')
+const axios = require("axios");
 
 var win;
 
@@ -62,11 +64,13 @@ ipcMain.on('asynchronous-message', function (event, arg) {
         // get capture image
         let png = clipboard.readImage().toPNG();
         console.log("********************")
+
+        // images check
         if (png.toString().trim().length === 0) {
             // Screenshots not acquired
-            console.log("Screentshots not acquired")
+            console.log("Screenshots not acquired")
 
-            // TODO return failed message
+            event.reply('asynchronous-reply', 'fp-error');
         } else {
             console.log("get the capture image")
             fs.writeFile(path.resolve(__dirname + '/cap.png'), png, function (err) {
@@ -75,7 +79,7 @@ ipcMain.on('asynchronous-message', function (event, arg) {
                 }
             })
 
-            // TODO call the back-end interface to get the recognition content
+            event.reply('asynchronous-reply', 'fp');
         }
     }
 });

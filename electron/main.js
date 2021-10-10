@@ -97,27 +97,18 @@ const startServer = () => {
         pythonPath: 'D:/ProgramData/Miniconda3/envs/python3/python.exe',
         scriptPath: '../server',
     }
-    PythonShell.run('app.py', options, function (err, results) {
+    pyProc = PythonShell.run('app.py', options, function (err, results) {
         console.log(err)
         if (err) throw err;
         console.log('result: %j', results)
     })
 
     console.log("server start.")
-    // let port = "4242"
-    // let script = path.join("../server", "app.py")
-
-    // let cmd = "python " + script
-    // pyProc = require('child_process').spawn("python -V")
-    // if (pyProc != null) {
-    //     console.log("child process start successfully")
-    // } else {
-    //     console.log("child process start failed")
-    // }
 }
 
 // stop the zerorpc when app was closed
 const stopServer = () => {
+    console.log("kill the python process")
     pyProc.kill()
     pyProc = null
 }

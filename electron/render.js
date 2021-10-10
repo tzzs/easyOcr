@@ -1,7 +1,6 @@
 const axios = require('axios');
-axios.defaults.baseURL = 'https://api.example.com';
+axios.defaults.baseURL = 'http://localhost:8081';
 
-let name = document.querySelector('#name')
 let result = document.querySelector('#result')
 
 let ocr_button = document.querySelector('#capture')
@@ -11,7 +10,9 @@ ocr_button.addEventListener('click', () => {
     axios.get('/ocr')
         .then(function (response) {
             // handle success
-            console.log(response);
+            console.log(response)
+            console.log(response.data);
+            result.textContent = response.data
         })
         .catch(function (error) {
             // handle error

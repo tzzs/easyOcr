@@ -2,15 +2,10 @@ const {
     app,
     BrowserWindow,
     clipboard,
-    nativeImage,
-    Menu,
-    electron,
-    ipcMain,
-    globalShortcut,
-    desktopCapturer
-} = require('electron')
+    ipcMain } = require('electron')
 const path = require("path");
 const fs = require("fs");
+const { PythonShell } = require('python-shell')
 
 var win;
 
@@ -27,9 +22,10 @@ function createWindow() {
         // alwaysOnTop: true,
         // skipTaskbar: true
     })
-    win.loadFile('index.html').then(r => function () {
+    win.loadFile('index.html').then(() => function () {
         console.log("start...")
     })
+    win.webContents.openDevTools(); // open Dev Tools when app start
 }
 
 app.whenReady().then(() => {
@@ -88,16 +84,29 @@ let pyProc = null
 
 // start zerorpc server to process OCR
 const startServer = () => {
-    let port = "4242"
-    let script = path.join("../server", "app.py")
-
-    let cmd = "python " + script
-    pyProc = require('child_process').spawn("python -V")
-    if (pyProc != null) {
-        console.log("child process start successfully")
-    } else {
-        console.log("child process start failed")
+    // new ways to use python-shell to start flask server
+    let options = {
+        mode: 'text',
+        pythonPath: 'D:/ProgramData/Miniconda3/envs/python3/python.exe',
+        scriptPath: '../server',
     }
+    PythonShell.run('app.py', options, function (err, results) {
+        console.log(err)
+        if (err) throw err;
+        console.log('result: %j', results)
+    })
+
+    console.log("server start.")
+    // let port = "4242"
+    // let script = path.join("../server", "app.py")
+
+    // let cmd = "python " + script
+    // pyProc = require('child_process').spawn("python -V")
+    // if (pyProc != null) {
+    //     console.log("child process start successfully")
+    // } else {
+    //     console.log("child process start failed")
+    // }
 }
 
 // stop the zerorpc when app was closed

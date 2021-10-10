@@ -2,19 +2,19 @@ const {
     app,
     BrowserWindow,
     clipboard,
-    ipcMain, ipcRenderer
+    ipcMain
 } = require('electron')
 const path = require("path");
 const fs = require("fs");
 const {PythonShell} = require('python-shell')
 const axios = require("axios");
 
-var win;
+let win;
 
 function createWindow() {
     win = new BrowserWindow({
-        width: 800,
-        height: 600,
+        width: 650,
+        height: 350,
         webPreferences: {
             preload: path.join(__dirname, 'preload.js'),
             nodeIntegration: true,
@@ -23,11 +23,14 @@ function createWindow() {
         },
         // alwaysOnTop: true,
         // skipTaskbar: true
+        maximizable: false,
+        resizable: false
     })
     win.loadFile('index.html').then(() => function () {
         console.log("start...")
     })
-    win.webContents.openDevTools(); // open Dev Tools when app start
+    //win.webContents.openDevTools(); // open Dev Tools when app start
+    win.menuBarVisible = false
 }
 
 app.whenReady().then(() => {

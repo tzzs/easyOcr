@@ -1,8 +1,9 @@
 from flask import Flask
 
-import ocr
+from ocr import ocr_service
 
 app = Flask(__name__)
+port = 8081
 
 
 @app.route("/")
@@ -12,8 +13,10 @@ def hello_world():
 
 @app.route("/ocr")
 def ocr():
-    return ocr.ocr_service()
+    res = ocr_service()
+    return res
 
 
 if __name__ == '__main__':
     app.run(debug=True, port=8081)
+    print('flask start at port:', port)

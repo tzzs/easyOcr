@@ -19,8 +19,9 @@ def ocr_service():
     img_path = '../electron/cap.png'
     img_type = imghdr.what(img_path)
     if img_type is None:
-        print("It is not a image.")
-        exit(0)
+        res = "It is not a image."
+        print(res)
+        return res
 
     result = ocr.ocr(img_path, cls=True)
     for line in result:
@@ -36,7 +37,7 @@ def ocr_service():
 
     print('*' * 20)
     print(txts)
-    return txts
+    return '\n'.join(txts)
 
 
 if __name__ == '__main__':

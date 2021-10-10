@@ -2,9 +2,9 @@
 const {ipcRenderer} = require('electron');
 
 document.getElementById('capture').onclick = () => {
-    // 设置按钮内容为识别中，按钮不可按，处理完成后恢复
+    // TODO 设置按钮内容为识别中，按钮不可按，处理完成后恢复
 
 
-    // 向主进程发送一个名为 winSize 消息
+    // 向主进程发送一个名为 capture 消息
     ipcRenderer.send('asynchronous-message', 'capture');
 };

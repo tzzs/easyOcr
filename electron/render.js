@@ -30,40 +30,5 @@ ipcRenderer.on('asynchronous-reply', function (event, args) {
         result.textContent = "Screenshots not acquired"
     }
 
-
+    // todo back the status
 })
-
-
-// let ocr_button = document.querySelector('#capture')
-//
-// ocr_button.addEventListener('click', () => {
-//     console.log("click event")
-//     axios.get('/ocr')
-//         .then(function (response) {
-//             // handle success
-//             console.log(response)
-//             console.log(response.data);
-//             result.textContent = response.data
-//         })
-//         .catch(function (error) {
-//             // handle error
-//             console.log(error);
-//         })
-//         .then(function () {
-//             // always executed
-//         });
-// })
-
-
-// name.dispatchEvent(new Event('input'))
-//
-// name.addEventListener('input', () => {
-//     client.invoke("hello", name.value, (error, res) => {
-//         if (error) {
-//             console.error(error)
-//         } else {
-//             result.textContent = res
-//         }
-//     })
-// })
-// name.dispatchEvent(new Event('input'))
